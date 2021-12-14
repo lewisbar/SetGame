@@ -26,7 +26,6 @@ struct Game {
                 }
             }
         }
-        for c in cards { print(c.description) }
         return cards
     }()
     
