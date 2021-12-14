@@ -9,22 +9,23 @@ import SwiftUI
 
 struct DiamondShape: Shape {
     func path(in rect: CGRect) -> Path {
-        let center = CGPoint(x: rect.midX, y: rect.midY)
-        let radius = min(rect.width, rect.height) / 2
-        let start = CGPoint(x: center.x, y: center.y - radius)
-        let left = CGPoint(x: center.x - radius, y: center.y)
-        let bottom = CGPoint(x: center.x, y: center.y + radius)
-        let right = CGPoint(x: center.x + radius, y: center.y)
+        let top = CGPoint(x: rect.midX, y: rect.minY)
+        let left = CGPoint(x: rect.minX, y: rect.midY)
+        let bottom = CGPoint(x: rect.midX, y: rect.maxY)
+        let right = CGPoint(x: rect.maxX, y: rect.midY)
         
         var path = Path()
-        path.move(to: start)
-        path.addLines([left, bottom, right, start])
+        path.move(to: top)
+        path.addLines([left, bottom, right, top])
         return path
     }
 }
 
 struct DiamondShape_Previews: PreviewProvider {
     static var previews: some View {
-        DiamondShape()
+        ZStack {
+            Rectangle().stroke(lineWidth: 4).foregroundColor(.red)
+            DiamondShape()
+        }.frame(height: 200)
     }
 }

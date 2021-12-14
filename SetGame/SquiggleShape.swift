@@ -44,6 +44,6 @@ struct SquiggleShape_Previews: PreviewProvider {
         ZStack {
             Rectangle().stroke(lineWidth: 4).foregroundColor(.red)
             SquiggleShape()
-        }.frame(height: 200)
+        }.frame(height: 400)
     }
 }
