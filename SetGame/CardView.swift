@@ -8,19 +8,42 @@
 import SwiftUI
 
 struct CardView: View {
-    enum Number: Int { case one = 1, two = 2, three = 3 }
-    enum Shape { case diamond, squiggle, oval }
-    enum Shading { case solid, striped, open }
-    enum Color { case red, green, purple }
-    
-    let number: Number
-    let shape: Self.Shape
-    let shading: Shading
-    let color: Self.Color
+    let number: SetGame.Number
+    let shape: SetGame.Shape
+    let shading: SetGame.Shading
+    let color: SetGame.Color
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+//        VStack {
+//            symbolView()
+//                .foregroundColor(colorView as? Color)
+//                .stroke()
+//        }
+        Text("Hello")
     }
+    
+//    private func symbolView<T>() -> T where T: Shape {
+//        switch symbol {
+//        case .diamond:
+//            return DiamondShape()
+//        case .squiggle:
+//            return SquiggleShape()
+//        case .oval:
+//            return Ellipse()
+//        }()
+//    }
+//    
+//    @ViewBuilder
+//    private var colorView: some View {
+//        switch hue {
+//        case .red:
+//            Color(.red)
+//        case .green:
+//            Color(.green)
+//        case .purple:
+//            Color(.purple)
+//        }
+//    }
 }
 
 struct Card_Previews: PreviewProvider {

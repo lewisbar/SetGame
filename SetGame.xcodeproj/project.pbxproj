@@ -14,8 +14,8 @@
 		7C22C586276803D1007E8962 /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22C585276803D1007E8962 /* AspectVGrid.swift */; };
 		7C22C58827680438007E8962 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22C58727680438007E8962 /* CardView.swift */; };
 		7C22C58A2768054D007E8962 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22C5892768054D007E8962 /* SetGame.swift */; };
-		7C22C58C276809B1007E8962 /* DiamondShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22C58B276809B1007E8962 /* DiamondShape.swift */; };
-		7C22C59027680EF5007E8962 /* SquiggleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22C58F27680EF5007E8962 /* SquiggleShape.swift */; };
+		7C22C58C276809B1007E8962 /* SetShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22C58B276809B1007E8962 /* SetShape.swift */; };
+		7C22C59227682983007E8962 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22C59127682983007E8962 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +27,8 @@
 		7C22C585276803D1007E8962 /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 		7C22C58727680438007E8962 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		7C22C5892768054D007E8962 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
-		7C22C58B276809B1007E8962 /* DiamondShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondShape.swift; sourceTree = "<group>"; };
-		7C22C58F27680EF5007E8962 /* SquiggleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquiggleShape.swift; sourceTree = "<group>"; };
+		7C22C58B276809B1007E8962 /* SetShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetShape.swift; sourceTree = "<group>"; };
+		7C22C59127682983007E8962 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,11 +63,11 @@
 			children = (
 				7C22C5772768034C007E8962 /* SetGameApp.swift */,
 				7C22C5892768054D007E8962 /* SetGame.swift */,
+				7C22C59127682983007E8962 /* ViewModel.swift */,
 				7C22C5792768034C007E8962 /* ContentView.swift */,
 				7C22C58727680438007E8962 /* CardView.swift */,
 				7C22C585276803D1007E8962 /* AspectVGrid.swift */,
-				7C22C58B276809B1007E8962 /* DiamondShape.swift */,
-				7C22C58F27680EF5007E8962 /* SquiggleShape.swift */,
+				7C22C58B276809B1007E8962 /* SetShape.swift */,
 				7C22C57B2768034F007E8962 /* Assets.xcassets */,
 				7C22C57D2768034F007E8962 /* Preview Content */,
 			);
@@ -152,12 +152,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C22C58C276809B1007E8962 /* DiamondShape.swift in Sources */,
-				7C22C59027680EF5007E8962 /* SquiggleShape.swift in Sources */,
+				7C22C58C276809B1007E8962 /* SetShape.swift in Sources */,
 				7C22C57A2768034C007E8962 /* ContentView.swift in Sources */,
 				7C22C5782768034C007E8962 /* SetGameApp.swift in Sources */,
 				7C22C58A2768054D007E8962 /* SetGame.swift in Sources */,
 				7C22C586276803D1007E8962 /* AspectVGrid.swift in Sources */,
+				7C22C59227682983007E8962 /* ViewModel.swift in Sources */,
 				7C22C58827680438007E8962 /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
