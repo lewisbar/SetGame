@@ -11,13 +11,13 @@ struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                 let cards = viewModel.cards
                 ForEach(cards) { card in
                     cardView(for: card)
                 }
-            }
+            }.padding()
         }
     }
     
