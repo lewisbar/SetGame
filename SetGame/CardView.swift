@@ -19,7 +19,7 @@ struct CardView: View {
                 .stroke(lineWidth: 4)
                 .foregroundColor(.black)
             VStack {
-                ForEach(0..<number.rawValue) { _ in
+                ForEach(0..<number.rawValue, id: \.self) { _ in
                     shapeView
                         .aspectRatio(2, contentMode: .fit)
                         .padding()
@@ -32,8 +32,10 @@ struct CardView: View {
     private var shapeView: some View {
         switch shading {
         case .solid:
-            SetShape(shape: shape).fill().foregroundColor(colorView)
-            SetShape(shape: shape).stroke().foregroundColor(colorView)
+            ZStack {
+                SetShape(shape: shape).fill().foregroundColor(colorView)
+                SetShape(shape: shape).stroke().foregroundColor(colorView)
+            }
         case .open:
             SetShape(shape: shape).stroke(lineWidth: 4).foregroundColor(colorView)
         case .striped:
@@ -58,7 +60,7 @@ struct CardView: View {
 
 struct Card_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(number: .three, shape: .squiggle, shading: .open, color: .purple)
+        CardView(number: .one, shape: .diamond, shading: .solid, color: .purple)
 .previewInterfaceOrientation(.portrait)
     }
 }

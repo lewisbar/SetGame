@@ -16,6 +16,6 @@ class ViewModel: ObservableObject {
     }
     
     func pick(_ card: Game.Card) {
-        
+        print(card.description)
     }
 }

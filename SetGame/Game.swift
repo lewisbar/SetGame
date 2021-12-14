@@ -9,9 +9,9 @@ import Foundation
 
 struct Game {
     enum Number: Int, CaseIterable { case one = 1, two = 2, three = 3 }
-    enum Shape: CaseIterable { case diamond, squiggle, oval }
-    enum Shading: CaseIterable { case solid, striped, open }
-    enum Color: CaseIterable { case red, green, purple }
+    enum Shape: String, CaseIterable { case diamond, squiggle, oval }
+    enum Shading: String, CaseIterable { case solid, striped, open }
+    enum Color: String, CaseIterable { case red, green, purple }
     
     let cards: [Card] = {
         var cards = [Card]()
@@ -26,6 +26,7 @@ struct Game {
                 }
             }
         }
+        for c in cards { print(c.description) }
         return cards
     }()
     
@@ -35,5 +36,8 @@ struct Game {
         let shading: Shading
         let color: Color
         var id: Int
+        var description: String {
+            String(number.rawValue) + shape.rawValue + shading.rawValue + color.rawValue + String(id)
+        }
     }
 }
