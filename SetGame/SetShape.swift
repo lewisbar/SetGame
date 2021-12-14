@@ -28,8 +28,7 @@ struct SetShape: Shape {
         let right = CGPoint(x: rect.maxX, y: rect.midY)
         
         var path = Path()
-        path.move(to: top)
-        path.addLines([left, bottom, right, top])
+        path.addLines([top, right, bottom, left, top])
         return path
     }
     
@@ -98,7 +97,7 @@ struct SetSymbol_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Rectangle().stroke(lineWidth: 4).foregroundColor(.red)
-            SetShape(shape: .squiggle)
+            SetShape(shape: .diamond).stroke()
         }.frame(height: 200)
     }
 }

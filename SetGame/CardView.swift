@@ -14,12 +14,13 @@ struct CardView: View {
     let color: SetGame.Color
     
     var body: some View {
-//        VStack {
-//            symbolView()
-//                .foregroundColor(colorView as? Color)
-//                .stroke()
-//        }
-        Text("Hello")
+        VStack {
+            ForEach(0..<number.rawValue) { _ in
+                shapeView
+                    .aspectRatio(2, contentMode: .fit)
+                    .padding()
+            }
+        }
     }
     
 //    private func symbolView<T>() -> T where T: Shape {
@@ -32,22 +33,38 @@ struct CardView: View {
 //            return Ellipse()
 //        }()
 //    }
-//    
-//    @ViewBuilder
-//    private var colorView: some View {
-//        switch hue {
-//        case .red:
-//            Color(.red)
-//        case .green:
-//            Color(.green)
-//        case .purple:
-//            Color(.purple)
-//        }
-//    }
+//
+
+    @ViewBuilder
+    private var shapeView: some View {
+        switch shading {
+        case .solid:
+            SetShape(shape: shape).fill().foregroundColor(colorView)
+        case .open:
+            SetShape(shape: shape).stroke(lineWidth: 4).foregroundColor(colorView)
+        case .striped:
+            ZStack {
+                SetShape(shape: shape).fill().foregroundColor(colorView).opacity(0.2)
+                SetShape(shape: shape).stroke(lineWidth: 4).foregroundColor(colorView)
+            }
+        }
+    }
+    
+    private var colorView: Color {
+        switch color {
+        case .red:
+            return Color(.red)
+        case .green:
+            return Color(.green)
+        case .purple:
+            return Color(.purple)
+        }
+    }
 }
 
 struct Card_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(number: .two, shape: .diamond, shading: .solid, color: .red)
+        CardView(number: .three, shape: .squiggle, shading: .open, color: .purple)
+.previewInterfaceOrientation(.portrait)
     }
 }
