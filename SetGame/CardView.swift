@@ -19,12 +19,13 @@ struct CardView: View {
                 .stroke(lineWidth: 4)
                 .foregroundColor(.black)
             VStack {
+                Spacer()
                 ForEach(0..<number.rawValue, id: \.self) { _ in
                     shapeView
                         .aspectRatio(2, contentMode: .fit)
-                        .padding()
                 }
-            }.padding(.vertical)
+                Spacer()
+            }.padding()
         }
     }
 
@@ -60,7 +61,7 @@ struct CardView: View {
 
 struct Card_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(number: .one, shape: .diamond, shading: .solid, color: .purple)
+        CardView(number: .three, shape: .diamond, shading: .solid, color: .purple)
 .previewInterfaceOrientation(.portrait)
     }
 }
