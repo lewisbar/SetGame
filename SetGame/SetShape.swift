@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SetShape: Shape {
-    let shape: SetGame.Shape
+    let shape: Game.Shape
 
     func path(in rect: CGRect) -> Path {
         switch shape {

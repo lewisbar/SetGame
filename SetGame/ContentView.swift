@@ -8,9 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel: ViewModel
+    
     var body: some View {
-        Text("Hello")
-        // AspectVGrid(items: <#T##[_]#>, aspectRatio: <#T##CGFloat#>, content: <#T##(_) -> _#>)
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
+                ForEach(viewModel.cards) { card in
+                    cardView(for: card)
+                }
+            }.padding(.horizontal)
+        }
+    }
+    
+    @ViewBuilder
+    func cardView(for card: Game.Card) -> some View {
+        CardView(number: card.number, shape: card.shape, shading: card.shading, color: card.color)
+            .aspectRatio(2/3, contentMode: .fit)
+            .padding(4)
+            .onTapGesture {
+                viewModel.pick(card)
+            }
     }
 }
 
@@ -59,6 +76,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewModel: ViewModel(game: Game()))
     }
 }

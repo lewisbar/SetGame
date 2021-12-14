@@ -8,38 +8,32 @@
 import SwiftUI
 
 struct CardView: View {
-    let number: SetGame.Number
-    let shape: SetGame.Shape
-    let shading: SetGame.Shading
-    let color: SetGame.Color
+    let number: Game.Number
+    let shape: Game.Shape
+    let shading: Game.Shading
+    let color: Game.Color
     
     var body: some View {
-        VStack {
-            ForEach(0..<number.rawValue) { _ in
-                shapeView
-                    .aspectRatio(2, contentMode: .fit)
-                    .padding()
-            }
+        ZStack {
+            RoundedRectangle(cornerRadius: 25)
+                .stroke(lineWidth: 4)
+                .foregroundColor(.black)
+            VStack {
+                ForEach(0..<number.rawValue) { _ in
+                    shapeView
+                        .aspectRatio(2, contentMode: .fit)
+                        .padding()
+                }
+            }.padding(.vertical)
         }
     }
-    
-//    private func symbolView<T>() -> T where T: Shape {
-//        switch symbol {
-//        case .diamond:
-//            return DiamondShape()
-//        case .squiggle:
-//            return SquiggleShape()
-//        case .oval:
-//            return Ellipse()
-//        }()
-//    }
-//
 
     @ViewBuilder
     private var shapeView: some View {
         switch shading {
         case .solid:
             SetShape(shape: shape).fill().foregroundColor(colorView)
+            SetShape(shape: shape).stroke().foregroundColor(colorView)
         case .open:
             SetShape(shape: shape).stroke(lineWidth: 4).foregroundColor(colorView)
         case .striped:
