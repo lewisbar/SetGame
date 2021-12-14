@@ -18,6 +18,9 @@ struct CardView: View {
             RoundedRectangle(cornerRadius: 25)
                 .stroke(lineWidth: 4)
                 .foregroundColor(.black)
+            RoundedRectangle(cornerRadius: 25)
+                .fill()
+                .foregroundColor(.white)
             VStack {
                 Spacer()
                 ForEach(0..<number.rawValue, id: \.self) { _ in
