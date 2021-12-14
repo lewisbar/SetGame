@@ -13,7 +13,7 @@ struct Game {
     enum Shading: String, CaseIterable { case solid, striped, open }
     enum Color: String, CaseIterable { case red, green, purple }
     
-    let cards: [Card] = {
+    var cards: [Card] = {
         var cards = [Card]()
         var id = 0
         for number in Number.allCases {
@@ -28,6 +28,10 @@ struct Game {
         }
         return cards
     }()
+    
+    mutating func shuffle() {
+        cards.shuffle()
+    }
     
     struct Card: Identifiable {
         let number: Number

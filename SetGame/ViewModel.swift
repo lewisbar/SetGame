@@ -13,6 +13,7 @@ class ViewModel: ObservableObject {
     
     init(game: Game) {
         self.game = game
+        self.game.shuffle()
     }
     
     func pick(_ card: Game.Card) {
