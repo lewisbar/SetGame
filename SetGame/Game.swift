@@ -33,6 +33,7 @@ struct Game {
     var table: [Card] { cards.filter { $0.isOnTable }.sorted { $0.tableIndex! < $1.tableIndex! }  }
     var selection: [Card] { cards.filter { $0.isSelected } }
     var score = 0
+    var canDealMore: Bool { table.count < 21 && !deck.isEmpty }
     
     mutating func start() {
         shuffle()
@@ -48,6 +49,7 @@ struct Game {
     }
     
     mutating func deal(_ amount: Int) {
+        guard canDealMore else { return }
         for _ in 0..<amount {
             if let nextCard = deck.first {
                 cards[nextCard.index].tableIndex = table.count

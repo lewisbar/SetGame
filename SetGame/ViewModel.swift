@@ -11,6 +11,7 @@ class ViewModel: ObservableObject {
     @Published private var game: Game
     var table: [Game.Card] { game.table }
     var score: Int { game.score }
+    var canDealMore: Bool { game.canDealMore }
     
     init(game: Game) {
         self.game = game
