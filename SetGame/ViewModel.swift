@@ -23,4 +23,9 @@ class ViewModel: ObservableObject {
     func deal() {
         game.deal(3)
     }
+    
+    func newGame() {
+        game = Game()
+        game.start()
+    }
 }

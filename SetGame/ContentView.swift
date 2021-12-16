@@ -23,7 +23,10 @@ struct ContentView: View {
             HStack {
                 Button(action: viewModel.deal) {
                     Text("Deal")
-                    Spacer()
+                }
+                Spacer()
+                Button(action: viewModel.newGame) {
+                    Text("New")
                 }
             }.padding()
         }
