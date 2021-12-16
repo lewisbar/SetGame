@@ -20,8 +20,10 @@ struct ContentView: View {
             HStack {
                 Button(action: viewModel.deal) { Text("Deal") }
                 Spacer()
+                Text("Sets: \(viewModel.score)")
+                Spacer()
                 Button(action: viewModel.newGame) { Text("New") }
-            }.padding()
+            }.padding([.bottom, .horizontal])
         }
     }
     

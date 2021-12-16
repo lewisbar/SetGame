@@ -10,6 +10,7 @@ import Foundation
 class ViewModel: ObservableObject {
     @Published private var game: Game
     var table: [Game.Card] { game.table }
+    var score: Int { game.score }
     
     init(game: Game) {
         self.game = game
