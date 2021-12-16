@@ -71,6 +71,10 @@ struct Game {
                 print("Not a set")
             }  // TODO: Penalty if wrong?
         case 3...:
+            guard !card.isSelected else {
+                cards[card.index].isSelected = false
+                break
+            }
             for selectedCard in selection { cards[selectedCard.index].isSelected = false }
             cards[card.index].isSelected = true
         default:
