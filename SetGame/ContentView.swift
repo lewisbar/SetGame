@@ -11,11 +11,19 @@ struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                let cards = viewModel.table
-                ForEach(cards, id: \.self) { card in
-                    cardView(for: card)
+        VStack {
+            ScrollView(showsIndicators: false) {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
+                    let cards = viewModel.table
+                    ForEach(cards, id: \.self) { card in
+                        cardView(for: card)
+                    }
+                }.padding()
+            }
+            HStack {
+                Button(action: viewModel.deal) {
+                    Text("Deal")
+                    Spacer()
                 }
             }.padding()
         }

@@ -19,4 +19,8 @@ class ViewModel: ObservableObject {
     func pick(_ card: Game.Card) {
         game.pick(card)
     }
+    
+    func deal() {
+        game.deal(3)
+    }
 }
