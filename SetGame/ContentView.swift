@@ -18,10 +18,6 @@ struct ContentView: View {
         VStack {
             GeometryReader { geometry in
                 ScrollView(showsIndicators: false) {
-                    // let cardAspectRatio = geometry.size.width / geometry.size.height
-                    // let cardWidth = widthThatFits(itemCount: viewModel.table.count, in: geometry.size, itemAspectRatio: cardAspectRatio, itemPadding: cardPadding, marginPadding: gridPadding)
-                    // let columnCount = recommendedColumnCount(itemCount: viewModel.table.count, in: geometry.size, itemAspectRatio: cardAspectRatio, itemPadding: cardPadding, marginPadding: gridPadding)
-                    
                     let gridItem = GridItem(.flexible())
                     let columnCount = columnCount(numberOfCards: viewModel.table.count, size: geometry.size)
                     LazyVGrid(columns: [GridItem](repeating: gridItem, count: columnCount)) {
@@ -62,13 +58,13 @@ struct ContentView: View {
         case 9:
             return 3
         case 12:
-            return size.width / 4 >= 80 ? 4 : 3
+            return 4
         case 15:
-            return size.width / 5 >= 80 ? 5 : 3
+            return size.width / 5 >= 80 ? 5 : 4
         case 18:
-            return size.width / 6 >= 80 ? 6 : 3
+            return size.width / 6 >= 80 ? 6 : (size.width / 5 >= 80 ? 5 : 4)
         case 21:
-            return size.width / 7 >= 80 ? 7 : 3
+            return size.width / 7 >= 80 ? 7 : (size.width / 6 >= 80 ? 6 : (size.width / 5 >= 80 ? 5 : 4))
         default:
             return Int(size.width / 80)
         }
@@ -144,6 +140,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContentView(viewModel: ViewModel(game: Game()))
+                .previewDevice("iPhone SE (2nd generation)")
 .previewInterfaceOrientation(.portrait)
         }
     }
