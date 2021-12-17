@@ -30,12 +30,8 @@ struct ContentView: View {
                 }
             }
             HStack {
-                if viewModel.canDealMore {
-                    Button(action: viewModel.deal) { Text("Deal") }
-                } else {
-                    Button(action: viewModel.deal) { Text("Deal") }
-                    .foregroundColor(.gray)
-                }
+                Button(action: viewModel.deal) { Text("Deal") }
+                .disabled(!viewModel.canDealMore)
                 Spacer()
                 Text("Sets: \(viewModel.score)")
                 Spacer()
