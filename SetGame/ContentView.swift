@@ -70,8 +70,7 @@ struct ContentView: View {
         case 21:
             return size.width / 7 >= 80 ? 7 : 3
         default:
-            print("This amount of cards is not supported.")
-            return 0
+            return Int(size.width / 80)
         }
     }
 //
