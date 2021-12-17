@@ -67,7 +67,8 @@ struct Game {
             cards[card.index].isSelected = true
             if isASet(selection) {
                 score += 1
-                replaceSet()
+                if table.count <= 12 { replaceSet() }
+                else { removeSet() }
                 print("You found a set. New score: \(score).")
             } else {
                 print("Not a set")
@@ -89,6 +90,12 @@ struct Game {
             if let nextCard = deck.first {
                 cards[nextCard.index].tableIndex = card.tableIndex
             }
+            cards[card.index].isActive = false
+        }
+    }
+    
+    mutating func removeSet() {
+        for card in selection {
             cards[card.index].isActive = false
         }
     }
