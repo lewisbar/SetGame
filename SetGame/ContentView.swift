@@ -43,7 +43,8 @@ struct ContentView: View {
             shape: card.shape,
             shading: card.shading,
             color: card.color,
-            isSelected: card.isSelected
+            isSelected: card.isSelected,
+            isPartOfWrongSet: card.isPartOfWrongSet
         ).aspectRatio(aspectRatio, contentMode: .fit)
             .padding(cardPadding)
             .onTapGesture { viewModel.pick(card) }

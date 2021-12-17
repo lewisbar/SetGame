@@ -58,6 +58,8 @@ struct Game {
     }
     
     mutating func pick(_ card: Card) {
+        unmarkWrongSet()
+        
         switch selection.count {
         case 2:
             guard !card.isSelected else {
@@ -71,6 +73,7 @@ struct Game {
                 else { removeSet() }
                 print("You found a set. New score: \(score).")
             } else {
+                markWrongSet()
                 print("Not a set")
             }  // TODO: Penalty if wrong?
         case 3...:
@@ -100,6 +103,18 @@ struct Game {
         }
     }
     
+    mutating func markWrongSet() {
+        for card in selection {
+            cards[card.index].isPartOfWrongSet = true
+        }
+    }
+    
+    mutating func unmarkWrongSet() {
+        for card in selection {
+            cards[card.index].isPartOfWrongSet = false
+        }
+    }
+    
     mutating func isASet(_ selection: [Card]) -> Bool {
         let isNumberSet = selection.allSatisfy({ $0.number == selection[0].number }) || Set([selection[0].number, selection[1].number, selection[2].number]) == Set(Game.Number.allCases)
         let isShapeSet = selection.allSatisfy({ $0.shape == selection[0].shape }) || Set([selection[0].shape, selection[1].shape, selection[2].shape]) == Set(Game.Shape.allCases)
@@ -117,6 +132,7 @@ struct Game {
         var tableIndex: Int?
         var isOnTable: Bool { tableIndex != nil }
         var isSelected = false
+        var isPartOfWrongSet = false
         var isActive = true {
             didSet {
                 tableIndex = nil

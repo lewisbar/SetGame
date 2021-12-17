@@ -13,6 +13,7 @@ struct CardView: View {
     let shading: Game.Shading
     let color: Game.Color
     var isSelected: Bool
+    var isPartOfWrongSet: Bool
     
     var body: some View {
         ZStack {
@@ -21,7 +22,7 @@ struct CardView: View {
                 .foregroundColor(.black)
             RoundedRectangle(cornerRadius: 25)
                 .fill()
-                .foregroundColor(isSelected ? .gray : .white)
+                .foregroundColor(isSelected ? (isPartOfWrongSet ? .red : .gray) : .white)
             VStack {
                 Spacer()
                 ForEach(0..<number.rawValue, id: \.self) { _ in
@@ -65,7 +66,7 @@ struct CardView: View {
 
 struct Card_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(number: .three, shape: .diamond, shading: .solid, color: .purple, isSelected: false)
+        CardView(number: .three, shape: .diamond, shading: .solid, color: .purple, isSelected: false, isPartOfWrongSet: false)
 .previewInterfaceOrientation(.portrait)
     }
 }
