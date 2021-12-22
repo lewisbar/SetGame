@@ -10,20 +10,19 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
     
-    let cardAspectRatio: CGFloat = 2/3
-    let cardPadding: CGFloat = 0
-    let gridPadding: CGFloat = 4
+    let gridPadding: CGFloat = 8
     
     var body: some View {
         VStack {
             GeometryReader { geometry in
-                ScrollView(showsIndicators: false) {
-                    let gridItem = GridItem(.flexible())
-                    let columnCount = columnCount(numberOfCards: viewModel.table.count, size: geometry.size)
-                    LazyVGrid(columns: [GridItem](repeating: gridItem, count: columnCount)) {
-                        ForEach(viewModel.table, id: \.self) { card in cardView(for: card, aspectRatio: cardAspectRatio, cardPadding: cardPadding) }
-                    }.padding(gridPadding)
-                }
+                let gridItem = GridItem(.flexible())
+                let aspectRatio = geometry.size.width / geometry.size.height
+                let columnCount = columnCount(numberOfCards: viewModel.table.count, size: geometry.size)
+                LazyVGrid(columns: [GridItem](repeating: gridItem, count: columnCount)) {
+                    ForEach(viewModel.table, id: \.self) { card in
+                        cardView(for: card, aspectRatio: aspectRatio)
+                    }
+                }.padding(gridPadding)
             }
             HStack {
                 Button(action: viewModel.deal) { Text("Deal") }
@@ -37,39 +36,85 @@ struct ContentView: View {
     }
     
     @ViewBuilder
-    private func cardView(for card: Game.Card, aspectRatio: CGFloat, cardPadding: CGFloat) -> some View {
+    private func cardView(for card: Game.Card, aspectRatio: CGFloat) -> some View {
         CardView(
             number: card.number,
             shape: card.shape,
             shading: card.shading,
             color: card.color,
             isSelected: card.isSelected,
-            isPartOfWrongSet: card.isPartOfWrongSet
+            isPartOfWrongSet: card.isPartOfWrongSet,
+            aspectRatio: aspectRatio
         ).aspectRatio(aspectRatio, contentMode: .fit)
-            .padding(cardPadding)
             .onTapGesture { viewModel.pick(card) }
     }
     
     private func columnCount(numberOfCards: Int, size: CGSize) -> Int {
-        switch numberOfCards {
-        case 3:
-            return 3
-        case 6:
-            return 3
-        case 9:
-            return 3
-        case 12:
-            return 4
-        case 15:
-            return size.width / 5 >= 80 ? 5 : 4
-        case 18:
-            return size.width / 6 >= 80 ? 6 : (size.width / 5 >= 80 ? 5 : 4)
-        case 21:
-            return size.width / 7 >= 80 ? 7 : (size.width / 6 >= 80 ? 6 : (size.width / 5 >= 80 ? 5 : 4))
-        default:
-            return Int(size.width / 80)
-        }
+        Int(CGFloat(numberOfCards).squareRoot().rounded(.up))
+//
+//        if isInPortraitMode(size) { return columnCountForPortraitMode(numberOfCards: numberOfCards, size: size) }
+//        else { return columnCountForLandscapeMode(numberOfCards: numberOfCards, size: size)}
     }
+    
+//    private func isInPortraitMode(_ size: CGSize) -> Bool {
+//        size.width <= size.height
+//    }
+//
+//    private func columnCountForPortraitMode(numberOfCards: Int, size: CGSize) -> Int {
+//        Int(CGFloat(numberOfCards).squareRoot().rounded(.up))
+//        switch numberOfCards {
+//        case 1:
+//            return 1
+//        case 2...4:
+//            return 2
+//        case 5...9:
+//            return 3
+//        case 10...16:
+//            return 4
+//        case 17...25:
+//            return 5
+//        case 26...36:
+//            return 6
+//        case 37...49:
+//            return 7
+//        case 50...64:
+//            return 8
+//        case 65...81:
+//            return 9
+//        default:
+//            return Int(size.width / 80)
+//        }
+//    }
+//
+//    private func columnCountForLandscapeMode(numberOfCards: Int, size: CGSize) -> Int {
+//        return Int(size.width / 80)
+//    }
+    
+//    private func columnCount(numberOfCards: Int, size: CGSize) -> Int {
+//        let cardCount = viewModel.table.count
+//        let maxColumnCount = Int(size.width / 80)
+//        let maxRowCount = Int(size.height / (80 / cardAspectRatio))
+//
+//        var columnCount = maxColumnCount
+//        var rowCount = 1
+//        var oldDifference = (maxColumnCount - columnCount) + (maxRowCount - rowCount)
+//        var oldColumnCount = columnCount
+//        while rowCount < maxRowCount {
+//            columnCount -= 1
+//            rowCount += 1
+//            let newDifference = (maxColumnCount - columnCount) + (maxRowCount - rowCount)
+//            if newDifference < oldDifference {
+//                oldDifference = newDifference
+//                oldColumnCount = columnCount
+//            } else {
+//                return oldColumnCount
+//            }
+////            if columnCount * rowCount > cardCount {
+////                return columnCount - 1
+////            }
+//        }
+//        return columnCount
+//    }
 //
 //    private func widthThatFits(itemCount: Int, in size: CGSize, itemAspectRatio: CGFloat, itemPadding: CGFloat, marginPadding: CGFloat) -> CGFloat {
 //        print(size.width)

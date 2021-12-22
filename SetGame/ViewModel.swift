@@ -27,7 +27,6 @@ class ViewModel: ObservableObject {
     }
     
     func newGame() {
-        game = Game()
         game.start()
     }
 }

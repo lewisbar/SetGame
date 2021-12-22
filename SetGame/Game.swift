@@ -13,8 +13,22 @@ struct Game {
     enum Shading: String, CaseIterable { case solid, striped, open }
     enum Color: String, CaseIterable { case red, green, purple }
     
-    var cards: [Card] = {
-        var cards = [Card]()
+    var score = 0
+    var cards = [Card]()
+    
+    var deck: [Card] { cards.filter { $0.isActive && !$0.isOnTable } }
+    var table: [Card] { cards.filter { $0.isOnTable }.sorted { $0.tableIndex! < $1.tableIndex! }  }
+    var selection: [Card] { cards.filter { $0.isSelected } }
+    var canDealMore: Bool { !deck.isEmpty }
+    
+    mutating func start() {
+        createNewCards()
+        shuffle()
+        deal(12)
+    }
+    
+    private mutating func createNewCards() {
+        cards = []
         var index = 0
         for number in Number.allCases {
             for shape in Shape.allCases {
@@ -26,18 +40,6 @@ struct Game {
                 }
             }
         }
-        return cards
-    }()
-    
-    var deck: [Card] { cards.filter { $0.isActive && !$0.isOnTable } }
-    var table: [Card] { cards.filter { $0.isOnTable }.sorted { $0.tableIndex! < $1.tableIndex! }  }
-    var selection: [Card] { cards.filter { $0.isSelected } }
-    var score = 0
-    var canDealMore: Bool { !deck.isEmpty }
-    
-    mutating func start() {
-        shuffle()
-        deal(12)
     }
     
     mutating func shuffle() {

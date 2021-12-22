@@ -97,7 +97,7 @@ struct SetSymbol_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Rectangle().stroke(lineWidth: 4).foregroundColor(.red)
-            SetShape(shape: .diamond).stroke()
-        }.frame(height: 200)
+            SetShape(shape: .squiggle).stroke()
+        }.frame(height: 250)
     }
 }
