@@ -22,6 +22,7 @@ struct Game {
     var canDealMore: Bool { !deck.isEmpty }
     
     mutating func start() {
+        score = 0
         createNewCards()
         shuffle()
         deal(12)
