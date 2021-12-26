@@ -28,7 +28,7 @@ struct SetShape: Shape {
         let right = CGPoint(x: rect.maxX, y: rect.midY)
         
         var path = Path()
-        path.addLines([top, right, bottom, left, top, right])  // Stopping at top results in a visible gap
+        path.addLines([top, right, bottom, left, top, right])  // Stopping at top results in a visible gap, so I go one point further
         return path
     }
     
