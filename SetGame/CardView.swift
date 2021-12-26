@@ -70,6 +70,15 @@ struct CardView: View {
     }
 }
 
+
+
+
+
+
+
+
+
+
 struct Card_Previews: PreviewProvider {
     static var previews: some View {
         CardView(number: .three, shape: .squiggle, shading: .solid, color: .purple, isSelected: false, isPartOfWrongSet: false, aspectRatio: 2/3)

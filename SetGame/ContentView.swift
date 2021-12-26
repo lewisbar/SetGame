@@ -46,7 +46,7 @@ struct ContentView: View {
             isPartOfWrongSet: card.isPartOfWrongSet,
             aspectRatio: aspectRatio
         ).aspectRatio(aspectRatio, contentMode: .fit)
-            .onTapGesture { viewModel.pick(card) }
+            .onTapGesture { withAnimation { viewModel.pick(card) } }
     }
     
     private func columnCount(numberOfCards: Int, size: CGSize) -> Int {
