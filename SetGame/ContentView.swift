@@ -25,7 +25,7 @@ struct ContentView: View {
                 }.padding(gridPadding)
             }
             HStack {
-                Button(action: viewModel.deal) { Text("Deal") }
+                Button("Deal") { withAnimation { viewModel.deal() } }
                 .disabled(!viewModel.canDealMore)
                 Spacer()
                 Text("Sets: \(viewModel.score)")
