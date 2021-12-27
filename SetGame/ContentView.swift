@@ -14,16 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            GeometryReader { geometry in
-                let gridItem = GridItem(.flexible())
-                let aspectRatio = geometry.size.width / geometry.size.height
-                let columnCount = columnCount(numberOfCards: viewModel.table.count, size: geometry.size)
-                LazyVGrid(columns: [GridItem](repeating: gridItem, count: columnCount)) {
-                    ForEach(viewModel.table, id: \.self) { card in
-                        cardView(for: card, aspectRatio: aspectRatio)
-                    }
-                }.padding(gridPadding)
-            }
+            cardGrid
             HStack {
                 Button("Deal") { withAnimation { viewModel.deal() } }
                 .disabled(!viewModel.canDealMore)
@@ -32,6 +23,20 @@ struct ContentView: View {
                 Spacer()
                 Button(action: viewModel.newGame) { Text("New") }
             }.padding([.bottom, .horizontal])
+        }
+    }
+    
+    @ViewBuilder
+    private var cardGrid: some View {
+        GeometryReader { geometry in
+            let gridItem = GridItem(.flexible())
+            let aspectRatio = geometry.size.width / geometry.size.height
+            let columnCount = Int(CGFloat(viewModel.table.count).squareRoot().rounded(.up))
+            LazyVGrid(columns: [GridItem](repeating: gridItem, count: columnCount)) {
+                ForEach(viewModel.table, id: \.self) { card in
+                    cardView(for: card, aspectRatio: aspectRatio)
+                }
+            }.padding(gridPadding)
         }
     }
     
@@ -47,10 +52,6 @@ struct ContentView: View {
             aspectRatio: aspectRatio
         ).aspectRatio(aspectRatio, contentMode: .fit)
             .onTapGesture { withAnimation { viewModel.pick(card) } }
-    }
-    
-    private func columnCount(numberOfCards: Int, size: CGSize) -> Int {
-        Int(CGFloat(numberOfCards).squareRoot().rounded(.up))
     }
 }
 
