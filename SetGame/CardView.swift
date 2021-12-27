@@ -20,12 +20,13 @@ struct CardView: View {
         GeometryReader { geometry in
             let lineWidth = geometry.size.width / 40
             let padding = geometry.size.width / 10
+            let cornerRadius = geometry.size.width / 10
             
             ZStack {
-                RoundedRectangle(cornerRadius: 25)
+                RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(lineWidth: lineWidth)
                     .foregroundColor(.black)
-                RoundedRectangle(cornerRadius: 25)
+                RoundedRectangle(cornerRadius: cornerRadius)
                     .fill()
                     .foregroundColor(isSelected ? (isPartOfWrongSet ? .red : .gray) : .white)
                 VStack {

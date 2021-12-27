@@ -18,6 +18,7 @@ struct Game {
     
     var deck: [Card] { cards.filter { $0.isActive && !$0.isOnTable } }
     var table: [Card] { cards.filter { $0.isOnTable }.sorted { $0.tableIndex! < $1.tableIndex! }  }
+    var discarded: [Card] { cards.filter { !$0.isActive } }
     var selection: [Card] { cards.filter { $0.isSelected } }
     var canDealMore: Bool { !deck.isEmpty }
     
@@ -126,7 +127,7 @@ struct Game {
         return isNumberSet && isShapeSet && isShadingSet && isColorSet
     }
     
-    struct Card: Hashable {
+    struct Card: Identifiable {
         let number: Number
         let shape: Shape
         let shading: Shading
@@ -142,6 +143,8 @@ struct Game {
                 isSelected = false
             }
         }
+        var id: Int { return index }
+        
         
         var description: String {
             String(number.rawValue) + shape.rawValue + shading.rawValue + color.rawValue + String(index)

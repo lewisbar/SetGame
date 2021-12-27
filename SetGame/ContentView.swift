@@ -9,15 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
-    
     let gridPadding: CGFloat = 8
+    let cardAspectRatio: CGFloat = 2/3
+    let maxDeckHeight: CGFloat = 80
     
     var body: some View {
         VStack {
             cardGrid
             HStack {
-                Button("Deal") { withAnimation { viewModel.deal() } }
-                .disabled(!viewModel.canDealMore)
+                deck
                 Spacer()
                 Text("Sets: \(viewModel.score)")
                 Spacer()
@@ -33,8 +33,9 @@ struct ContentView: View {
             let aspectRatio = geometry.size.width / geometry.size.height
             let columnCount = Int(CGFloat(viewModel.table.count).squareRoot().rounded(.up))
             LazyVGrid(columns: [GridItem](repeating: gridItem, count: columnCount)) {
-                ForEach(viewModel.table, id: \.self) { card in
+                ForEach(viewModel.table) { card in
                     cardView(for: card, aspectRatio: aspectRatio)
+                        .onTapGesture { withAnimation { viewModel.pick(card) } }
                 }
             }.padding(gridPadding)
         }
@@ -51,7 +52,17 @@ struct ContentView: View {
             isPartOfWrongSet: card.isPartOfWrongSet,
             aspectRatio: aspectRatio
         ).aspectRatio(aspectRatio, contentMode: .fit)
-            .onTapGesture { withAnimation { viewModel.pick(card) } }
+    }
+    
+    @ViewBuilder
+    private var deck: some View {
+        ZStack {
+            ForEach(viewModel.deck) { card in
+                cardView(for: card, aspectRatio: cardAspectRatio)
+            }
+        }
+        .frame(maxHeight: maxDeckHeight)
+        .onTapGesture { withAnimation { viewModel.deal() } }
     }
 }
 

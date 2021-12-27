@@ -10,6 +10,8 @@ import Foundation
 class ViewModel: ObservableObject {
     @Published private var game: Game
     var table: [Game.Card] { game.table }
+    var deck: [Game.Card] { game.deck }
+    var discarded: [Game.Card] { game.discarded }
     var score: Int { game.score }
     var canDealMore: Bool { game.canDealMore }
     
