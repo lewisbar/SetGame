@@ -22,7 +22,8 @@ struct ContentView: View {
                 Text("Sets: \(viewModel.score)")
                 Spacer()
                 Button(action: viewModel.newGame) { Text("New") }
-            }.padding([.bottom, .horizontal])
+            }
+            .padding([.bottom, .horizontal])
         }
     }
     
@@ -37,7 +38,8 @@ struct ContentView: View {
                     cardView(for: card, aspectRatio: aspectRatio)
                         .onTapGesture { withAnimation { viewModel.pick(card) } }
                 }
-            }.padding(gridPadding)
+            }
+            .padding(gridPadding)
         }
     }
     
@@ -51,7 +53,8 @@ struct ContentView: View {
             isSelected: card.isSelected,
             isPartOfWrongSet: card.isPartOfWrongSet,
             aspectRatio: aspectRatio
-        ).aspectRatio(aspectRatio, contentMode: .fit)
+        )
+        .aspectRatio(aspectRatio, contentMode: .fit)
     }
     
     @ViewBuilder

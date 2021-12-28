@@ -36,7 +36,8 @@ struct CardView: View {
                             .aspectRatio(3 * aspectRatio, contentMode: .fit)
                     }
                     Spacer()
-                }.padding(padding)
+                }
+                .padding(padding)
             }
         }
     }
