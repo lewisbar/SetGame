@@ -60,7 +60,7 @@ struct ContentView: View {
     @ViewBuilder
     private var deck: some View {
         ZStack {
-            ForEach(viewModel.deck) { card in
+            ForEach(viewModel.deck.reversed()) { card in
                 cardView(for: card, aspectRatio: cardAspectRatio)
             }
         }
