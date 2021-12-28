@@ -21,7 +21,7 @@ struct ContentView: View {
                 Spacer()
                 Text("Sets: \(viewModel.score)")
                 Spacer()
-                Button(action: viewModel.newGame) { Text("New") }
+                discarded
             }
             .padding([.bottom, .horizontal])
         }
@@ -66,6 +66,17 @@ struct ContentView: View {
         }
         .frame(maxHeight: maxDeckHeight)
         .onTapGesture { withAnimation { viewModel.deal() } }
+    }
+    
+    @ViewBuilder
+    private var discarded: some View {
+        ZStack {
+            ForEach(viewModel.discarded) { card in
+                cardView(for: card, aspectRatio: cardAspectRatio)
+            }
+        }
+        .frame(maxHeight: maxDeckHeight)
+        .onTapGesture { withAnimation { viewModel.newGame() } }
     }
 }
 

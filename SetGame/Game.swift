@@ -18,12 +18,13 @@ struct Game {
     
     var deck: [Card] { cards.filter { $0.isActive && !$0.isOnTable } }
     var table: [Card] { cards.filter { $0.isOnTable }.sorted { $0.tableIndex! < $1.tableIndex! }  }
-    var discarded: [Card] { cards.filter { !$0.isActive } }
     var selection: [Card] { cards.filter { $0.isSelected } }
     var canDealMore: Bool { !deck.isEmpty }
+    var discarded = [Card]()
     
     mutating func start() {
         score = 0
+        discarded = []
         createNewCards()
         shuffle()
         deal(12)
@@ -98,12 +99,14 @@ struct Game {
                 cards[nextCard.index].tableIndex = card.tableIndex
             }
             cards[card.index].isActive = false
+            discarded.append(cards[card.index])
         }
     }
     
     mutating func removeSet() {
         for card in selection {
             cards[card.index].isActive = false
+            discarded.append(cards[card.index])
         }
     }
     
@@ -139,8 +142,10 @@ struct Game {
         var isPartOfWrongSet = false
         var isActive = true {
             didSet {
-                tableIndex = nil
-                isSelected = false
+                if !isActive {
+                    tableIndex = nil
+                    isSelected = false
+                }
             }
         }
         var id: Int { return index }
