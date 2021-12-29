@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
+    @Namespace private var cardsNamespace
     let gridPadding: CGFloat = 8
     let cardAspectRatio: CGFloat = 2/3
     let maxDeckHeight: CGFloat = 80
@@ -36,6 +37,7 @@ struct ContentView: View {
             LazyVGrid(columns: [GridItem](repeating: gridItem, count: columnCount)) {
                 ForEach(viewModel.table) { card in
                     cardView(for: card, aspectRatio: aspectRatio)
+                        .matchedGeometryEffect(id: card.id, in: cardsNamespace)
                         .onTapGesture { withAnimation { viewModel.pick(card) } }
                 }
             }
@@ -62,6 +64,7 @@ struct ContentView: View {
         ZStack {
             ForEach(viewModel.deck.reversed()) { card in
                 cardView(for: card, aspectRatio: cardAspectRatio)
+                    .matchedGeometryEffect(id: card.id, in: cardsNamespace)
             }
         }
         .frame(maxHeight: maxDeckHeight)
@@ -73,6 +76,7 @@ struct ContentView: View {
         ZStack {
             ForEach(viewModel.discarded) { card in
                 cardView(for: card, aspectRatio: cardAspectRatio)
+                    .matchedGeometryEffect(id: card.id, in: cardsNamespace)
             }
         }
         .frame(maxHeight: maxDeckHeight)
