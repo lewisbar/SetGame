@@ -15,6 +15,7 @@ struct CardView: View {
     var isSelected: Bool
     var isPartOfWrongSet: Bool
     let aspectRatio: CGFloat
+    var yRotation: CGFloat = 0
     
     var body: some View {
         GeometryReader { geometry in
@@ -37,7 +38,11 @@ struct CardView: View {
                     }
                     Spacer()
                 }
+                // .rotation3DEffect(Angle(degrees: yRotation), axis: (x: 0, y: 1, z: 0))
                 .padding(padding)
+                if yRotation > 90 {
+                    backside(cornerRadius: cornerRadius)
+                }
             }
         }
     }
@@ -69,6 +74,13 @@ struct CardView: View {
         case .purple:
             return Color(.purple)
         }
+    }
+    
+    @ViewBuilder
+    private func backside(cornerRadius: CGFloat) -> some View {
+        RoundedRectangle(cornerRadius: cornerRadius)
+            .fill()
+            .foregroundColor(.red)
     }
 }
 

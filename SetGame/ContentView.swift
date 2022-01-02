@@ -46,7 +46,7 @@ struct ContentView: View {
     }
     
     @ViewBuilder
-    private func cardView(for card: Game.Card, aspectRatio: CGFloat) -> some View {
+    private func cardView(for card: Game.Card, aspectRatio: CGFloat, yRotation: CGFloat = 0) -> some View {
         CardView(
             number: card.number,
             shape: card.shape,
@@ -54,7 +54,8 @@ struct ContentView: View {
             color: card.color,
             isSelected: card.isSelected,
             isPartOfWrongSet: card.isPartOfWrongSet,
-            aspectRatio: aspectRatio
+            aspectRatio: aspectRatio,
+            yRotation: yRotation
         )
         .aspectRatio(aspectRatio, contentMode: .fit)
     }
@@ -63,7 +64,7 @@ struct ContentView: View {
     private var deck: some View {
         ZStack {
             ForEach(viewModel.deck.reversed()) { card in
-                cardView(for: card, aspectRatio: cardAspectRatio)
+                cardView(for: card, aspectRatio: cardAspectRatio, yRotation: 180)
                     .matchedGeometryEffect(id: card.id, in: cardsNamespace)
             }
         }
